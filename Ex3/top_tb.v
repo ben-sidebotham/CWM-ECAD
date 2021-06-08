@@ -37,30 +37,29 @@ module top_tb(
 		on_off = 1;
 		change = 0;
 		err = 0;
-		
-		
-		//check clock
-		//#3
-		//rst = 1;
 
 		forever begin
+			rst = 1;
 			#(CLK_PERIOD)
-			counter_out_prev = counter_out;
 			if(counter_out != 0)
 			begin
 				$display("***TEST FAILED - counter not 0 when rst=1");
 				err=1;
 			end
+			on_off = 1;
 			counter_out_prev = counter_out;
+			change = 0;
 			rst=0;
-			#(CLK_PERIOD)
+			#(3*CLK_PERIOD)
 			if(counter_out != counter_out_prev)
 			begin
 				$display("***TEST FAILED - counter should not have changed");
 				err=1;
 			end
-			counter_out_prev = counter_out;
 			change = 1;
+			#(3*CLK_PERIOD)
+
+			counter_out_prev = counter_out;			
 			#(CLK_PERIOD)
 			if (counter_out != counter_out_prev + 1)
 			begin
@@ -81,13 +80,13 @@ module top_tb(
     
 	//Finish test, check for success	
      	initial begin
-        	#50 
+        	#500 
         	if (err==0)
           		$display("***TEST PASSED***");
        	 	$finish;
       	end
 
-//Todo: Instantiate counter module
+	//Instantiate counter module
 	monitor top (
 		.clk (clk),
 		.rst (rst),

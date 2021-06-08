@@ -32,6 +32,7 @@ module monitor (
                     
 		
 	always @(posedge clk) begin
+		
 		if(rst)
 			counter_out <= 0;
 		else if(change)
@@ -39,6 +40,8 @@ module monitor (
 				counter_out <= counter_out + 1;
 			else
 				counter_out <= counter_out - 1;
+		else 
+			counter_out <= counter_out;
 	end
       
 endmodule
