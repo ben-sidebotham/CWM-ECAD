@@ -7,5 +7,56 @@
 // You need to write the whole file
 //////////////////////////////////////////////////////////////////////////////////
 
+`timescale 1ns / 100ps
 
+module top_tb (
+	);
 
+	parameter CLK_PERIOD = 10;
+	
+	reg clk;
+	reg [2:0] colour;
+	reg enable;
+	wire [24:0] rgb;
+
+	reg err;
+	reg [24:0] rgb_prev;
+
+	//clock
+	initial begin
+		clk = 1'b0;
+		forever
+			#(CLK_PERIOD/2) clk=~clk;
+	end
+
+	//logic
+	initial begin
+		err = 0;
+		colour = 2'b0;
+		rgb_prev = rgb;
+		enable = 1;
+		#CLK_PERIOD
+		
+		forever begin
+			#CLK_PERIOD
+			rgb_prev = rgb;
+			colour = colour + 1;
+		end
+	end
+
+	//finish test
+	initial begin
+		#300
+		if (err==0)
+			$display("TEST PASSED");
+		$finish;
+	end
+
+	colcon top (
+		.clk(clk),
+		.colour(colour),
+		.enable(enable),
+		.rgb(rgb)
+	);
+	
+endmodule
