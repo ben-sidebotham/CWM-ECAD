@@ -15,12 +15,12 @@ module top_tb (
 	parameter CLK_PERIOD = 10;
 	
 	reg clk;
-	reg [2:0] colour;
 	reg enable;
-	wire [24:0] rgb;
+	reg [2:0] colour;
+	wire [23:0] rgb;
 
 	reg err;
-	reg [24:0] rgb_prev;
+	reg [23:0] rgb_prev;
 
 	//clock
 	initial begin
@@ -54,8 +54,8 @@ module top_tb (
 
 	colcon top (
 		.clk(clk),
-		.colour(colour),
 		.enable(enable),
+		.colour(colour),		
 		.rgb(rgb)
 	);
 	

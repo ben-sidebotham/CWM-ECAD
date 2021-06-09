@@ -18,9 +18,9 @@
 `timescale 1ns / 100ps
 
 module colcon (
-	input clk,
-	input [2:0] colour,
+	input clk,	
 	input enable,
+	input [2:0] colour,
 	output [23:0] rgb
 	);
 
