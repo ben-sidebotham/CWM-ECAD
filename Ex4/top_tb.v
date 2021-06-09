@@ -32,7 +32,7 @@ module top_tb (
 	//Toggle button forever
 	initial begin
 		button = 0;
-		#(CLK_PERIOD*2);
+		#(CLK_PERIOD*4);
 		button = 1;
 		forever
 			#(CLK_PERIOD) button=~button;					
@@ -42,26 +42,17 @@ module top_tb (
 		
 		err=0;
 		rst=0;
-		#CLK_PERIOD;
+		#(CLK_PERIOD*2);
 		rst=1;
-		#(CLK_PERIOD/2);
+		#(CLK_PERIOD);
 		rst=0;
 		#(CLK_PERIOD/2);
 		colour_prev = colour;	
 		
 		forever begin
-			
-			// state should stay unchanged if button==0
-			colour_prev = colour;
 			#(CLK_PERIOD);
-			if (button==0 && colour!=colour_prev)
-				begin
-				$display("TEST FAILED - colour changed when button is 0");
-				err = 1;
-				end
-
-			// test all six colours
-			#CLK_PERIOD			
+			
+			// test all six colours	
 			case(colour_prev)
 				3'b001: if (colour != 3'b010) begin
 					$display("TEST FAILED - 001 -> 010");
@@ -88,6 +79,15 @@ module top_tb (
 					err = 1;
 					end
 			endcase
+			// state should stay unchanged if button==0
+			// colour_prev = colour;
+			colour_prev = colour;
+			#(CLK_PERIOD)
+			if (button==0 && colour!=colour_prev)
+				begin
+				$display("TEST FAILED - colour changed when button is 0");
+				err = 1;
+				end
 			colour_prev = colour;
 		end
 	end

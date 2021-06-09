@@ -40,8 +40,8 @@ module top_tb(
 
 	//test by cycling temp between 16 and 24
 	initial begin
-	   temp = 5'b10000;
-	   forever begin			
+		temp = 5'b10000;
+		forever begin			
 		if (temp <= 5'b10000)
 			up_down = 1;
 		else if (temp >= 5'b11000)
@@ -54,7 +54,11 @@ module top_tb(
 			#CLK_PERIOD
 			temp = temp - 5'b00001;
 		end	
-	   end
+		end
+
+		#CLK_PERIOD
+		temp = dir ? temp + 5'b00001 : temp - 5'b00001;
+§§§
 	end
 
 		
