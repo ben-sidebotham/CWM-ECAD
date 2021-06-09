@@ -19,8 +19,7 @@ module top_tb(
 	wire cooling;
 
 	reg err = 0;
-	reg up_down = 1;
-	reg [4:0] state_prev;
+	reg dir = 1;
 	
 	initial begin   	
 	   clk = 1'b0;
@@ -41,30 +40,38 @@ module top_tb(
 	//test by cycling temp between 16 and 24
 	initial begin
 		temp = 5'b10000;
-		forever begin			
-		if (temp <= 5'b10000)
-			up_down = 1;
-		else if (temp >= 5'b11000)
-			up_down = 0;
-		else if (up_down == 1) begin
+		forever begin
 			#CLK_PERIOD
-			temp = temp + 5'b00001;
-		end
-		else if (up_down == 0) begin
-			#CLK_PERIOD
-			temp = temp - 5'b00001;
-		end	
+			temp = dir ? temp + 5'b00001 : temp - 5'b00001;
+			if (temp > 5'b11000 || temp < 5'b10000)
+				dir = ~dir;
 		end
 
-		#CLK_PERIOD
-		temp = dir ? temp + 5'b00001 : temp - 5'b00001;
-§§§
 	end
-
+	
+	// logic
+	initial begin
+		#(CLK_PERIOD*3/4)
+		forever begin
+			#CLK_PERIOD
+			//test cooling
+			if ((cooling && (temp <= 5'b10100)) || !cooling && (temp >= 5'b10110))
+				begin
+				$display("COOLING TEST FAILED", temp, heating, cooling);
+				err=1;
+				end
+			//test heating
+			if ((heating && (temp >= 5'b10100)) || !heating && (temp <= 5'b10010))
+				begin
+				$display("HEATING TEST FAILED", temp, heating, cooling);
+				err=1;
+				end
+		end
+	end
 		
 	// finish test
 	initial begin
-		#200
+		#250
 		if (err==0)
 			$display("TEST PASSED");
 		$finish;

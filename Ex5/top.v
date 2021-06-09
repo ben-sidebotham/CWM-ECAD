@@ -55,7 +55,7 @@ module aircon (
 				end
 			end
 			2'b10: begin
-				if (temp <= 5'b10010) begin //move to idle
+				if (temp <= 5'b10100) begin //move to idle
 					state = 2'b01;
 					heating = 0;
 					cooling = 0;
