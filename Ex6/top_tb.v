@@ -36,11 +36,30 @@ module top_tb (
 		rgb_prev = rgb;
 		enable = 1;
 		#CLK_PERIOD
+		if (rgb != rgb_prev) begin
+			$display("TEST FAILED - NOT THE RIGHT COLOUR");
+			err = 1;
+			end
 		
 		forever begin
-			#CLK_PERIOD
+			#(2*CLK_PERIOD)
 			rgb_prev = rgb;
-			colour = colour + 1;
+			colour = colour + 1;		
+		end
+	end
+
+	initial begin
+		#(CLK_PERIOD*4)
+		#(CLK_PERIOD*3/4)
+		forever begin
+
+			if (enable) begin
+				#(CLK_PERIOD*2)
+				if (rgb == rgb_prev) begin
+					$display("TEST FAILED - COLOUR HAS NOT CHANGED");
+					err = 1;
+				end
+			end
 		end
 	end
 

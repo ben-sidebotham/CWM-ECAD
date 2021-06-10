@@ -25,7 +25,7 @@ module colcon (
 	);
 
 
-	blk_mem_gen_0 top (
+	myblkmem top (
 	  .clka(clk),    // input wire clka
 	  .ena(enable),      // input wire ena
 	  .wea(1'b0),      // input wire [0 : 0] wea
