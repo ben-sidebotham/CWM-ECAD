@@ -18,6 +18,11 @@ puts "Creating Project"
 
 create_fileset -constrset -quiet constraints
 
+read_verilog "blinds.v"
+read_verilog "led.v"
+read_verilog "colcon.v"
+read_verilog "mux.v"
+read_verilog "selector.v"
 read_verilog "aircon.v"
 read_verilog "top.v"
 read_verilog "top_tb.v"
