@@ -1,0 +1,28 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Exercise #8  - Simple End-to-End Design
+// Student Name: Benjamin Sidebotham
+// Date: 11/06/21
+//
+//  Stage 4 Report
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+	1. 
+	Warning - [Synth 8-3331] design top has unconnected port rst_n - Reset has not been used.
+		
+	There was also this warning - [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+		Quote Prof Zilberman: "There's a ticket in Xilinx for this warning that was fixed in later releases"
+
+	There were some bad practice warnings in the Methodology tab: e.g.
+		- An input delay is missing on temperature_0 relative to clock(s) clk
+		- An output delay is missing on cooling relative to clock(s) clk
+		
+		
+	2. Worst Case Hold Time: 0.056
+	3. Worst Case Setup Time: 8.775
+	4. 6 LUTs were used
+	5. 4 FFs were used
+	6. Zero Block RAM was used
+	7. Expected Power Consumption: 2.474 W
+	8. Synthesis Time: 00:03:58 ---- Implementation Time: 00:13:52
