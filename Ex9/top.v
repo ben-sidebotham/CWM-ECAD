@@ -12,10 +12,11 @@
 //
 //	Copy modules from prev exercises √
 //	Copy mem.coe √
-//	Add IP lines to project.tcl √
+//	Add IP lines to project.tcl and project_sim.tcl √
 //	Add ports to top.v √
-//	Add read_verilog for all modules to project.tcl √
+//	Add read_verilog for all modules to project.tcl and project_sim.tcl √
 //	Edit constraints.xdc
+//	Check things are working
 //	Write top_tb
 //
 //  inputs:
@@ -38,7 +39,7 @@ module top(
 	input temperature_3,
 	input temperature_4,
 	output heating,
-	output cooling
+	output cooling,
 
 	// Todo: add ports for light selector
 	input button,
