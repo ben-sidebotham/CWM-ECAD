@@ -18,6 +18,10 @@ puts "Creating Project"
 
 create_fileset -constrset -quiet constraints
 
+# Add IP generation
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name myblkmem
+set_property -dict [list CONFIG.Component_Name {myblkmem} CONFIG.Write_Width_A {24} CONFIG.Write_Depth_A {8} CONFIG.Read_Width_A {24} CONFIG.Write_Width_B {24} CONFIG.Read_Width_B {24} CONFIG.Load_Init_File {true} CONFIG.Coe_File {/home/centos/CWM-ECAD/Ex6/mem.coe}] [get_ips myblkmem]
+
 read_verilog "blinds.v"
 read_verilog "led.v"
 read_verilog "colcon.v"
