@@ -20,7 +20,7 @@ module top_tb (
 	wire heating;
 	wire cooling;
 
-	reg [23:0] light; //selector
+	wire [23:0] light; //selector
 	reg button;
 	reg sel;
 
@@ -119,7 +119,7 @@ module top_tb (
 	.sel(sel),
 	.light_0(light[0]),.light_1(light[1]),.light_2(light[2]),.light_3(light[3]),.light_4(light[4]),.light_5(light[5]),.light_6(light[6]),.light_7(light[7]), 
 	.light_8(light[8]),.light_9(light[9]),.light_10(light[10]),.light_11(light[11]),.light_12(light[12]),.light_13(light[13]),.light_14(light[14]),.light_15(light[15]),
-	.light_16(light[16]),.light_17(light[17]),.light_18(light[18]),.light_19(light[19]),.light_20(light[20]),.light_21(light[21]),.light_22(light[22]),.light_23(light[23])
+	.light_16(light[16]),.light_17(light[17]),.light_18(light[18]),.light_19(light[19]),.light_20(light[20]),.light_21(light[21]),.light_22(light[22]),.light_23(light[23]),
 	
 	.a(a),
 	.b(b),
@@ -127,7 +127,7 @@ module top_tb (
 	.func_1(func[1]),
 	.func_2(func[2]),
 	.func_3(func[3]),
-	.roller_our(roller_out)
+	.roller_out(roller_out)
 	 
 	);
 
