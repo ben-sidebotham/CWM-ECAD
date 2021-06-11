@@ -15,9 +15,10 @@
 //	Add IP lines to project.tcl and project_sim.tcl √
 //	Add ports to top.v √
 //	Add read_verilog for all modules to project.tcl and project_sim.tcl √
-//	Edit constraints.xdc
-//	Check things are working
+//	Check things are working √
 //	Write top_tb
+//	Edit constraints.xdc
+//	synthesise and implement
 //
 //  inputs:
 //           rst_n, clk_n, clk_p, temperature [4:0], 
@@ -60,7 +61,7 @@ module top(
 	);
 
 	// collect lights
-	wire [23:0] light_out 
+	//wire [23:0] light_out;
 
    /* clock infrastructure, do not modify */
 	wire clk_ibufds;
